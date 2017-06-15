@@ -158,6 +158,7 @@ public class Loader {
 			}
 
 			MethodDeclaration md = new MethodDeclaration(methodDeclaration.getModifiers(), newMethodType, methodDeclaration.name.asString());
+			md.setBody(null);
 
 			md.annotations = annotations
 

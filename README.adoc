@@ -1,0 +1,19 @@
+== JAXRS API Stripper
+
+This application allows you to strip the APIs from a JAXRS application that
+has mixed implementation and api definition.
+
+JAXRS APIs should be defined in interfaces and then implemented. Its important to have them
+as separate artifacts so downstream dependencies can be explicit and force builds, and be obvious.
+It also allows easy mocking, easy direct injection in Jersey 2 (because of the client proxy) and
+overall significantly less code and maintenance.
+
+This application will take your existing packages of Java classes that mix implementation and interface
+and pull the interfaces out. It will then remove those annotations from your implementation classes.
+
+Its not perfect, it doesn't:
+
+- exclude imports that aren't used, IntelliJ can do this easily
+- include dto style classes that are being needed. This again should be pretty easy to move, and dtos if being used
+ should use my other dto plugin (dtogen)
+
