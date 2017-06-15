@@ -1,0 +1,8 @@
+translations:
+  - destinationFolder: target/generated-sample
+    destinationPackage: com.nutjob.wibble
+    sourceFolder: /some-location
+    includes:
+      - Resource
+    suffixes:
+      Resource: Service
