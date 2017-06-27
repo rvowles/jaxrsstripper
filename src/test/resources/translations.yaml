@@ -1,7 +1,7 @@
 translations:
   - destinationFolder: target/generated-sample
     destinationPackage: com.nutjob.wibble
-    sourceFolder: /some-location
+    sourceFolder: /Users/richard/clearpoint/gdt/gdt-bizservices/src/main/java
     includes:
       - Resource
     suffixes:
