@@ -1,7 +1,7 @@
 translations:
-  - destinationFolder: target/generated-sample
+  - destinationFolder: /Users/richard/clearpoint/gdt/gdt-bizservices/gdt-bizservices-events-api/src/main/java
     destinationPackage: com.nutjob.wibble
-    sourceFolder: /Users/richard/clearpoint/gdt/gdt-bizservices/src/main/java
+    sourceFolder: /Users/richard/clearpoint/gdt/gdt-bizservices/gdt-bizservices-events/src/main/java
     includes:
       - Resource
     suffixes:
