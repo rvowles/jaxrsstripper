@@ -10,6 +10,8 @@ import com.github.javaparser.ast.body.TypeDeclaration
 import com.github.javaparser.ast.expr.AnnotationExpr
 import com.github.javaparser.ast.expr.MarkerAnnotationExpr
 import com.github.javaparser.ast.expr.Name
+import com.github.javaparser.ast.expr.NameExpr
+import com.github.javaparser.ast.expr.SingleMemberAnnotationExpr
 import groovy.transform.CompileStatic
 
 /**
@@ -31,6 +33,9 @@ class NewInterface {
 		newInterface.setPackageDeclaration(existingFile.packageDeclaration.get());
 		NodeList<ImportDeclaration> imports = new NodeList<>();
 		imports.addAll(existingFile.imports)
+		imports.add(new ImportDeclaration(new Name("javax.ws.rs.Produces"), false, false))
+		imports.add(new ImportDeclaration(new Name("javax.ws.rs.Consumes"), false, false))
+		imports.add(new ImportDeclaration(new Name("javax.ws.rs.core.MediaType"), false, false))
 		imports.add(new ImportDeclaration(new Name("io.swagger.annotations.Api"), false, false))
 		newInterface.setImports(imports)
 
@@ -42,6 +47,14 @@ class NewInterface {
 		existingType.setAnnotations(NodeList.<AnnotationExpr> nodeList(existingType.annotations.findAll({it -> !interfaceAnnotation.contains(it)})));
 
 		newInterfaceType = new ClassOrInterfaceDeclaration(EnumSet.of(Modifier.PUBLIC), true, "I" + existingType.name.asString());
+
+		if (!interfaceAnnotation.find({it.nameAsString == 'Produces'})) {
+			interfaceAnnotation.add(new SingleMemberAnnotationExpr(new Name("Produces"), new NameExpr("MediaType.APPLICATION_JSON")))
+		}
+
+		if (!interfaceAnnotation.find({it.nameAsString == 'Consumes'})) {
+			interfaceAnnotation.add(new SingleMemberAnnotationExpr(new Name("Consumes"), new NameExpr("MediaType.APPLICATION_JSON")))
+		}
 
 		interfaceAnnotation.add(new MarkerAnnotationExpr("Api"))
 		newInterfaceType.setAnnotations(interfaceAnnotation)

@@ -19,6 +19,7 @@ import com.github.javaparser.ast.expr.MarkerAnnotationExpr
 import com.github.javaparser.ast.expr.Name
 import com.github.javaparser.ast.expr.SimpleName
 import com.github.javaparser.ast.type.ClassOrInterfaceType
+import com.github.javaparser.ast.type.ReferenceType
 import com.github.javaparser.ast.type.Type
 import com.github.javaparser.printer.PrettyPrinter
 import com.github.javaparser.printer.PrettyPrinterConfiguration
@@ -305,6 +306,11 @@ public class Loader {
 				}
 				return newParam
 			})))
+
+			// now we have to look for exceptions
+			for(ReferenceType te : methodDeclaration.getThrownExceptions()) {
+				md.addThrownException(te);
+			}
 
 			newInterface.methodBodies.add(md);
 		}
